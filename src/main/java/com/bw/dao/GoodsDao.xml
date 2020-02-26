@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bw.dao.GoodsDao">
+  
+ <select id="list" resultType="Goods">
+ 	select * from goods
+ 	<where>
+ 		<if test="tid!=null and tid!=0 ">
+ 			and tid=#{tid}
+ 		</if>
+ 		<if test="pid!=null and pid!=0 ">
+ 			and pid=#{pid}
+ 		</if>
+ 		<if test="price1!=null and price1!=0 ">
+ 			and price &gt;=#{price1}
+ 		</if>
+ 		<if test="price2!=null and price2!=0 ">
+ 			and price &lt;=#{price2}
+ 		</if>
+ 		<if test="gname!=null and gname!='' ">
+ 			and gname like concat('%',#{gname},'%')
+ 		</if>
+ 	</where>
+ </select>
+  <select id="listt" resultType="Gtype">
+ 	select * from gtype
+ </select>
+     
+<select id="listp" resultType="Pinpai">
+ 	select * from pinpai
+ </select>
+ <insert id="add">
+ 	insert into goods value(null,#{gname},#{ename},#{gsize},#{price},#{gcount},#{biaoqian},#{gpic},#{tid},#{pid})
+ </insert>
+</mapper>
